@@ -7,6 +7,7 @@ on:
 
 jobs:
   build_car:
+    needs: start
     runs-on: ubuntu-latest
     steps:
       - name: Assemble car
@@ -31,6 +32,7 @@ jobs:
           retention-days: 1
 
   build_motorbike:
+    needs: start
     runs-on: ubuntu-latest
     steps:
       - name: Assemble motorbike
@@ -91,6 +93,7 @@ jobs:
 
 
   build_truck:
+    needs: start
     runs-on: ubuntu-latest
     steps:
       - name: Assemble truck
@@ -150,3 +153,9 @@ jobs:
           test ! -f build/invoice_motorbike.txt
           test ! -f build/invoice_truck.txt
           echo "All vehicles present, no invoices leaked!"
+
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print start message
+        run: echo "Starting assembly of the vehicles"
